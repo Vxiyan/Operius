@@ -4,6 +4,42 @@
       <title>Operius</title>
     </head>
     <body>
-      <iframe src="https://script.google.com/macros/s/AKfycbxpNZjxFXfBnNFF3OhqKJCPOcCqq50UdU0-SjT4ZfIwmYSoy4pD2-Um2HDEVP27ADs6/exec">Operius Game</iframe>
+      <div class="iframe-container">
+        <iframe src="https://script.google.com/macros/s/AKfycbxpNZjxFXfBnNFF3OhqKJCPOcCqq50UdU0-SjT4ZfIwmYSoy4pD2-Um2HDEVP27ADs6/exec" title="Operius Game"></iframe>
+        <div class="resizer"></div>
+      </div>
+      <script>
+        const container = document.querySelector('.iframe-container');
+        const resizer = container.querySelector('.resizer');
+
+        let isResizing = false;
+
+        resizer.addEventListener('mousedown', function(e) {
+            isResizing = true;
+            document.body.style.userSelect = 'none'; // Prevent text selection during drag
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        });
+
+        function handleMouseMove(e) {
+            if (!isResizing) return;
+            const newWidth = e.clientX - container.getBoundingClientRect().left;
+            const newHeight = e.clientY - container.getBoundingClientRect().top;
+            
+            // Set minimum size to prevent the container from disappearing
+            const minWidth = 100;
+            const minHeight = 150;
+            
+            container.style.width = Math.max(newWidth, minWidth) + 'px';
+            container.style.height = Math.max(newHeight, minHeight) + 'px';
+        }
+
+        function handleMouseUp() {
+            isResizing = false;
+            document.body.style.userSelect = '';
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        }
+    </script>
     </body>
   </html>
