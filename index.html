@@ -2,6 +2,29 @@
   <html>
     <head>
       <title>Operius</title>
+      <style>
+         .iframe-container {
+            position: relative;
+            width: 440px; /* Default width based on 8x11 ratio */
+            height: 605px; /* Default height based on 8x11 ratio */
+            overflow: hidden;
+            border: 1px solid #ccc; /* Add a border for better visibility */
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .resizer {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            bottom: 0;
+            right: 0;
+            background-color: #495057;
+            cursor: se-resize;
+        }
+      </style>
     </head>
     <body>
       <div class="iframe-container">
